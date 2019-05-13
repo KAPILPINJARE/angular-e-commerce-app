@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <p style="text-align: center; font-size: 25px">Registration Form</p>
+    </div>
+    <div class="container" style="width: 40%">
+        <form #customerForm = "ngForm" novalidate (ngSubmit) = "onSubmit()">
+
+            <!-- {{ customerForm.form.valid }} -->
+
+            <!-- {{ customerForm.value | json }}
+            <br>
+            {{ customer | json }} -->
+
+            <div class="form-group">
+                <label class="form-label">Name: </label>
+                <input type="text" name="name" #name = "ngModel" [class.is-invalid] = "name.invalid && name.touched" class="form-control" [(ngModel)] = "customer.name" required/>
+                <div class="text-danger" [class.d-none] = "name.valid || name.untouched">Name is required</div>                
+            </div>
+
+            <!-- {{ name.valid }}  -->
+
+            <div class="form-group">
+                <label class="form-label">Email-Id: </label>
+                <input type="email" #emailid = "ngModel" name="email" class="form-control" [(ngModel)] = "customer.emailId" required/>
+                <div *ngIf = "emailid.errors && (emailid.invalid || emailid.touched)">
+                        <div *ngIf = "emailid.errors.required" class="text-danger">Email-Id is required.</div>
+                        <div *ngIf = "emailid.errors.email" class="text-center">Please propvide valid email</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password: </label>
+                <input type="password" name="password" class="form-control" [(ngModel)] = "customer.password" required/>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Contact: </label>
+                <input type="tel" name="contact" #phone = "ngModel" class="form-control" [(ngModel)] = "customer.contact" 
+                           pattern = "^\d{10}$" required [class.is-invalid] = "phone.invalid && phone.touched"/>
+                <!-- <div class="text-danger" [class.d-none] = "phone.valid || phone.untouched">Phone number is required and should be 10 digits.</div> -->
+                <div *ngIf = "phone.errors && (phone.invalid || phone.touched)">
+                        <div class="text-danger" *ngIf = "phone.errors.required">Phone number is required.</div>
+                        <div class="text-danger" *ngIf = "phone.errors.pattern">Phone number should be 10 digits.</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Gender: </label>&nbsp;&nbsp;&nbsp;
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="gender" value="Male" class="form-check-input" [(ngModel)] = "customer.gender"/>
+                    <label class="form-check-label">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input type="radio" name="gender" value="Female" class="form-check-input" [(ngModel)] = "customer.gender"/>
+                    <label class="form-check-label">Female</label>
+                </div>
+            </div>
+
+            <div ngModelGroup="address">
+                    <div class="form-group">
+                            <label class="form-label">Address Line 1: </label>
+                            <input type="text" name="addressLine1" class="form-control" [(ngModel)] = "customer.address.addressLine1" required/>
+                        </div>
+            
+                        <div class="form-group">
+                            <label class="form-label">State: </label>
+                            <select class="custom-select" name = "state" [(ngModel)] = "customer.address.state" required>
+                                <option selected value="">--select--</option>
+                                <option *ngFor="let state of states" value="{{state}}">{{ state }}</option>
+                            </select>
+                            <div></div>
+                        </div>
+            
+                        <div class="form-group">
+                            <label class="form-label">City: </label>
+                            <select class="custom-select" #city = "ngModel"   name = "city"  [(ngModel)] = "customer.address.city" required 
+                                        [class.is-invalid] = "city.invalid && city.touched">
+                                <option selected value="">--select--</option>
+                                <option *ngFor="let city of cities" value="{{city}}">{{ city }}</option>
+                            </select>
+                            <div class="text-danger" [class.d-none] = "city.valid || city.untouched">Please select a city</div>
+                        </div>
+            
+                        <div class="form-group">
+                            <label class="form-lable">Postal Code: </label> 
+                            <input type="number" name="postal" class="form-control" [(ngModel)] = "customer.address.postalCode" required/>
+                        </div>
+            </div>
+
+            <button type="submit"  class="btn btn-primary btn-block" [disabled] = "customerForm.form.invalid">Register</button>
+        </form>
+    </div>
+</body>
+
+</html>

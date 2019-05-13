@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <title>Home Page</title>
+</head>
+
+<body>
+  <div class="container">
+    <img src="assets/images/logo.jpg" class="img-thumbnail" style="width:120px; height: 60px;" />
+    <img src="assets/images/cart.jpg" class="img-thumbnail float-right" style="widows: 100px; height: 60px;" />
+  </div>
+
+  <div class="container">
+    <nav class="navbar bg-dark navbar-expand-sm">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a routerLink="" class="nav-link">Home</a></li>
+        <li class="nav-item"><a routerLink="books/programming" class="nav-link">Programming</a></li>
+        <li class="nav-item"><a routerLink="books/biographies" class="nav-link">Biographies</a></li>
+        <li class="nav-item"><a routerLink="books/business" class="nav-link">Business</a></li>
+        <li class="nav-item"><a routerLink="customer/registration" class="nav-link">Sign Up</a></li>
+        <li class="nav-item"><a routerLink="customer/login" class="nav-link">Sign In</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <br>
+  <router-outlet></router-outlet>
+
+  <br>
+
+  <div class="container">
+    <footer>
+      <div class="container" style="text-align: center; background-color: black; color: white">
+        <span>Website created by: Amit Fegade</span><br>
+        <span>Copyright&nbsp;&copy;2019 <a href="#">www.e-commerce.com</a></span>
+      </div>
+    </footer>
+  </div>
+
+</body>
+
+</html>
